@@ -23,8 +23,15 @@ namespace Songswears
             var browser = new WebClient();
             var url = "https://api.lyrics.ovh/v1/"+band+"/"+song;
             var json = browser.DownloadString(url);
-            Console.WriteLine(json);
+            var lyrics = JsonConvert.DeserializeObject<LyricsovhAnswer>(json);
+            Console.WriteLine(lyrics.lyrics);
 
         }
+    }
+
+    class LyricsovhAnswer
+    {
+        public string lyrics;
+        public string error; 
     }
 }
